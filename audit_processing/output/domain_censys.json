@@ -1,8 +1,0 @@
-[
-  {
-    "ip": "193.19.119.176",
-    "server_header": "Apache/2.4.25 (Debian)",
-    "protocols": "21,22,23,25,80,443,445,3306,5432,8080",
-    "title": "Instructions :: Damn Vulnerable Web Application (DVWA) v1.10 *Development*"
-  }
-]
