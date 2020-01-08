@@ -11,7 +11,7 @@ domain = sys.argv[1]
 options = Options()
 options.add_argument('--headless')
 
-driver = Firefox(options=options)
+driver = Firefox('/usr/local/bin', options=options)
 driver.get(f'http://toolbar.netcraft.com/site_report?url={domain}')
 time.sleep(5)
 history = driver.find_element_by_id('history_table')
