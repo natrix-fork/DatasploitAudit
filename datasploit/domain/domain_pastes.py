@@ -7,6 +7,7 @@ import json
 import sys
 import re
 from termcolor import colored
+import os
 
 ENABLED = True
 
@@ -82,12 +83,23 @@ def output(data, domain=""):
             print "Error Description: %s" % data[1]['error']['errors'][0]['reason']
     else:
         print "[+] %s results found\n" % len(data[1])
+        table_data = []
         for x in data[1]:
 	    title = x['title'].encode('ascii', 'ignore').decode('ascii')
 	    snippet = x['snippet'].encode('ascii', 'ignore').decode('ascii')
 	    link = x['link'].encode('ascii', 'ignore').decode('ascii')
             print "Title: %s\nURL: %s\nSnippet: %s\n" % (title, colorize(link), colorize(snippet))
+            table_data.append({
+                'title': title,
+                'url': link,
+                'snippet': snippet,
+            })
 
+        basepath = os.path.dirname(__file__)
+        filepath = os.path.abspath(
+            os.path.join(basepath, "..", "..", "audit_processing", "output", "domain_pastes.json"))
+        with open(filepath, 'w') as f:
+            json.dump(table_data, f)
 
 if __name__ == "__main__":
     try:
