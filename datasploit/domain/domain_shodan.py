@@ -7,6 +7,7 @@ import json
 import sys
 from termcolor import colored
 import time
+import os
 
 ENABLED = True
 
@@ -41,9 +42,23 @@ def output(data, domain=""):
                 style.BOLD + '\n[-] Shodan API Key not configured. Skipping Shodan search.\nPlease refer to http://datasploit.readthedocs.io/en/latest/apiGeneration/.\n' + style.END, 'red')
     else:
         if 'matches' in data.keys():
+            table_data = []
             for x in data['matches']:
                 print "IP: %s\nHosts: %s\nDomain: %s\nPort: %s\nData: %s\nLocation: %s\n" % (
                 x['ip_str'], x['hostnames'], x['domains'], x['port'], x['data'].replace("\n", ""), x['location'])
+                table_data.append({
+                    'ip': x['ip_str'],
+                    'hostnames': x['hostnames'],
+                    'domains': x['domains'],
+                    'port': x['port'],
+                    'data': x['data'],
+                    'location': x['location']
+                })
+            basepath = os.path.dirname(__file__)
+            filepath = os.path.abspath(
+                os.path.join(basepath, "..", "..", "audit_processing", "output", "domain_shodan.json"))
+            with open(filepath, 'w') as f:
+                json.dump(table_data, f)
         print "-----------------------------\n"
 
 

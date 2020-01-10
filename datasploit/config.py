@@ -3,7 +3,7 @@
 
 #Backup in ~/Desktop/config.py_backup
 
-shodan_api=""
+shodan_api="fwpsFkHzz3dLI8BysZyYQ9CUexcdWVGq"
 bing_api=""
 github_access_token="4ef16d35f968cd0f2c1fea61d78a55ad3c181459"
 builtwith_api=""
