@@ -1,5 +1,6 @@
 #!/usr/bin/env python
-
+import os
+import json
 import base
 import sys
 import whois
@@ -37,6 +38,11 @@ def output(data, domain=""):
             if data[k]:
                 data[k] = date.strftime('%m/%d/%Y')
     print data
+    basepath = os.path.dirname(__file__)
+    filepath = os.path.abspath(
+        os.path.join(basepath, "..", "..", "audit_processing", "output", "domain_whois.json"))
+    with open(filepath, 'w') as f:
+        json.dump(data, f)
     print "\n-----------------------------\n"
 
 

@@ -6,6 +6,9 @@ import requests
 import time
 import vault
 import sys
+import os
+import json
+
 
 from termcolor import colored
 
@@ -101,6 +104,11 @@ def output(data, domain=""):
                      'lists': lists_fields,
                      'stats': stats_fields
                     }
+    basepath = os.path.dirname(__file__)
+    filepath = os.path.abspath(
+        os.path.join(basepath, "..", "..", "audit_processing", "output", "domain_urlscanio.json"))
+    with open(filepath, 'w') as f:
+        json.dump(data, f)
     for search_field, fields_lists in master_fields.iteritems():
         for field, pname in fields_lists.iteritems():
             if field in data[search_field]:

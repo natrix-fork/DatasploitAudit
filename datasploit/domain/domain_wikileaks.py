@@ -6,7 +6,8 @@ from bs4 import BeautifulSoup
 import sys
 from termcolor import colored
 import time
-
+import json
+import os
 ENABLED = True
 
 
@@ -38,8 +39,18 @@ def main(domain):
 
 
 def output(data, domain=""):
+    result = []
     for tl, lnk in data.items():
         print "%s (%s)" % (repr(lnk), tl)
+        result.append({
+            'link': lnk.strip(),
+            'tl': tl.strip()
+        })
+    basepath = os.path.dirname(__file__)
+    filepath = os.path.abspath(
+        os.path.join(basepath, "..", "..", "audit_processing", "output", "domain_wikileaks.json"))
+    with open(filepath, 'w') as f:
+        json.dump(result, f)
     print ""
     print "For all results, visit: " + 'https://search.wikileaks.org/?query=&exact_phrase=%s&include_external_sources=True&order_by=newest_document_date' % domain
     print "\n-----------------------------\n"

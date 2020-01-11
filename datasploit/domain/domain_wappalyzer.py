@@ -1,10 +1,12 @@
 #!/usr/bin/env python
-
+import os
+import json
 import base
 from Wappalyzer import Wappalyzer, WebPage
 import sys
 import time
 from termcolor import colored
+
 
 ENABLED = True
 
@@ -50,6 +52,11 @@ def main(domain):
 
 
 def output(data, domain=""):
+    basepath = os.path.dirname(__file__)
+    filepath = os.path.abspath(
+        os.path.join(basepath, "..", "..", "audit_processing", "output", "domain_wappalyzer.json"))
+    with open(filepath, 'w') as f:
+        json.dump(data, f)
     for i in data:
         if data[i]:
             print "[+] Third party libraries in Use for %s:" % i
