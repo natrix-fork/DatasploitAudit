@@ -13,7 +13,7 @@ options = Options()
 options.add_argument('--headless')
 
 domain = sys.argv[1]
-driver = Firefox('/usr/local/bin')
+driver = Firefox('/usr/local/bin', options=options)
 driver.get('https://dnsdumpster.com/')
 time.sleep(5)
 subdomains = []
