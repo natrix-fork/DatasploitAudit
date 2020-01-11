@@ -2,3 +2,4 @@
 **/.idea
 audit_processing/output/*.json
 /audit_processing/geckodriver.log
+/datasploit/config.py
