@@ -28,7 +28,7 @@ try:
 
     for row in rows:
         subdomain = row.find_elements_by_tag_name('td')[0]
-        subdomain = subdomain.text[:subdomain.text.find('\n')]
+        subdomain = subdomain.text[:subdomain.text.find('\n')+1]
         subdomains.append(subdomain)
 except Exception as e:
     print('Error while parsing dnsdumster')
@@ -49,6 +49,7 @@ subdomains = set(subdomains)
 subdomains = [{'subdomain': subdomain} for subdomain in subdomains]
 basepath = os.path.dirname(__file__)
 filepath = os.path.abspath(os.path.join(basepath, "..", "output", "domain_subdomains.json"))
+
 with open(filepath, 'w') as f:
     json.dump(subdomains, f)
 
